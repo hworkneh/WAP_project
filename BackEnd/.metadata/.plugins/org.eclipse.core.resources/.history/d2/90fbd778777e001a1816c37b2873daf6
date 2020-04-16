@@ -1,0 +1,94 @@
+package edu.miu.goldendomemarket.repository;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.miu.goldendomemarket.domain.Account;
+import edu.miu.goldendomemarket.util.Database;
+
+public class AccountRepository {
+
+	private Database db;
+	
+	public AccountRepository(Database db) {
+		this.db=db;
+		
+	}
+	
+	public List<Account> findAll(){
+		List<Account> acc=new ArrayList<Account>();
+		ResultSet rs;
+		try {
+			rs = db.runSql("select * from account");
+			while(rs.next()) {
+				Integer accountId=Integer.parseInt(rs.getString("accountId"));
+				String fullName=rs.getString("fullName");
+				String email=rs.getString("email");
+				String password=rs.getString("password");
+				String accountType=rs.getString("accountType");
+				acc.add(new Account(accountId,fullName, email, password, accountType));
+			}
+			return acc;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public Account findById(Integer accountId) {
+		Account acc=null;
+		ResultSet rs;
+		try {
+			rs = db.runSql("select * from account where accountId='"+accountId+"'");
+			while(rs.next()) {
+				Integer raccountId=Integer.parseInt(rs.getString("accountId"));
+				String fullName=rs.getString("fullName");
+				String email=rs.getString("email");
+				String password=rs.getString("password");
+				String accountType=rs.getString("accountType");
+				acc=new Account(raccountId, fullName, email, password, accountType);
+			}
+			return acc;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public Account save(Account account) {
+		try {
+			//  ('asdf', 'asdf', 'asdf', 'asdf');
+			System.out.println(account.toString());
+			db.runSql("INSERT INTO `goldendomemarket`.`account` (`email`, `password`, `accountType`, `fullName`) VALUES('"+account.getEmail()+"','"+account.getPassword()+"','"+account.getAccountType()+"','"+account.getFullName()+"');");
+			return account;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}	
+	}
+	public Account update(Account account, Integer accountId) {
+		try {
+			db.runSql("update account set email='"+account.getEmail()+"',fullName='"+account.getFullName()+"',password='"+account.getPassword()+"', accountType='"+account.getAccountType()+"' where accountId='"+accountId+"'");
+			return account;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public void delete(Integer accountId) {
+		try {
+			db.runSql("delete from account where accountId='"+accountId+"'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

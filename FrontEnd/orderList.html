@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="An Online Ordering Service for Golden Dome Market">
+    <meta name="author" content="Anene Terefe, Hanna Workneh">
+    <meta name="keywords" content="HTML, CSS, jquery WAP jsp servlet, ajax">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href = "css/style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script defer src="js/orderlistadmin.js" ></script>	
+    <title>Golden Dome Market: Online Order Service</title>
+</head>
+<body>
+    <header id="navigation">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light"> <a class="navbar-brand" style="color:green" href="/adminpage.html">Golden Dome Market: Online Order Service</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="adminpage.html">Home <span class="sr-only">(current)</span> </a></li>
+                    <li class="nav-item active"><a class="nav-link" href="orderList.html" id="admin_orders">Order List</a></li>
+                    <li class="nav-item"><a class="nav-link" href="itemList.html" id="admin_items">Item List</a></li>
+                    <li class="nav-item"><a class="nav-link" href="accountList.html" id="admin_items">Account List</a></li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0"> <span id="welcome"> Welcome</span> <span><a href="index.html?logout=1" id="logout" class="btn btn-danger">Log Out</a></span> </form>
+            </div>
+        </nav>   
+    </header>
+    <main id="content">
+        <!--The content of the page is populated here-->  
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <br>
+                <h2 style="color:green">List of Orders</h2>
+                <div id="successalert" style="display: none;">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Success!</strong> New Record is saved.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <div id="failalert" style="display: none;">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Error!</strong> Something went wrong. Please try again.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <p>Type something in the input field to search...</p>  
+                <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Customer</th>
+                            <th>Email</th>
+                            <th>Item</th>
+                            <th>Order Date</th>
+                            <th>Amount</th>
+                            <th>Total Price</th>
+                            <th>Status</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="data"> </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal fade" id="changeStatusModal" tabindex="-1" role="dialog" aria-labelledby="changeStatusModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changeStatusModalLabel">Change Order Status</span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="changeStatusForm">
+                            <input type="text" hidden class="form-control" id="orderId" name="orderId">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" readonly class="form-control" id="customer" name="customer">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" readonly class="form-control" id="item" name="item">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <select class="form-control" name="status" id="editstatus" required>
+                                            <option value="">Select...</option>
+                                            <option value="Ordered">Ordered</option>
+                                            <option value="Ready">Ready</option>
+                                            <option value="Recived">Recived</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-primary">Save</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="deleteOrderModal" tabindex="-1" role="dialog" aria-labelledby="deleteOrderModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteOrderModalLabel">Delete Order </span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                    </div>
+                    <h2>Are you sure to delete the order?</h2>
+                    <div class="modal-body">
+                        <form id="deletOrderForm">
+                            <input type="text" hidden class="form-control" id="dorderId" name="orderId">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" readonly class="form-control" id="dcustomer" name="customer">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" readonly class="form-control" id="ditem" name="item">
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+ <footer class="footer">
+        <div id="footer-content">
+            <span class="text-muted">Anene Terefe,</span>
+            <span class="text-muted">Hanna Workneh</span>
+            <span style="float:right;" class="text-muted">&copy; April 2020</span>
+        </div>
+    </footer>    
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+   </body>
+</html>
+    

@@ -1,0 +1,49 @@
+package edu.miu.goldendomemarket.service.serviceImpl;
+
+import java.util.List;
+
+import edu.miu.goldendomemarket.domain.Account;
+import edu.miu.goldendomemarket.repository.AccountRepository;
+import edu.miu.goldendomemarket.service.AccountService;
+import edu.miu.goldendomemarket.util.Database;
+
+public class AccountServiceImpl implements AccountService {
+
+	private AccountRepository accountRepository;
+	
+	public AccountServiceImpl(Database db) {
+		// TODO Auto-generated constructor stub
+		accountRepository=new AccountRepository(db);
+	}
+	
+	@Override
+	public List<Account> findAll() {
+		// TODO Auto-generated method stub
+		return accountRepository.findAll();
+	}
+
+	@Override
+	public Account findById(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Account save(Account account) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Account update(Account account, String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(String email) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

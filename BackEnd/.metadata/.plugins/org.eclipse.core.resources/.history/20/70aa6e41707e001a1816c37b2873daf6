@@ -1,0 +1,65 @@
+package edu.miu.goldendomemarket.domain;
+
+public class Order {
+
+	private Integer orderId;
+	private Integer accountId;
+	private Integer itemId;
+	private String orderDate;
+	private String status;
+	private Integer amount;//how many of the items
+	public Order() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Order(String orderId,String email, String orderDate, String status, String itemId, String count) {
+		super();
+		this.orderId = orderId;
+		this.email = email;
+		this.orderDate = orderDate;
+		this.status = status;
+		this.itemId = itemId;
+		this.count = count;
+	}
+	public String getOrderIdl() {
+		return orderId;
+	}
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getItemId() {
+		return itemId;
+	}
+	public void setItemId(String itemId) {
+		this.itemId = itemId;
+	}
+	public String getCount() {
+		return count;
+	}
+	public void setCount(String count) {
+		this.count = count;
+	}
+	@Override
+	public String toString() {
+		return "Order [email=" + email + ", orderDate=" + orderDate + ", status=" + status + ", itemId=" + itemId
+				+ ", count=" + count + "]";
+	}
+}

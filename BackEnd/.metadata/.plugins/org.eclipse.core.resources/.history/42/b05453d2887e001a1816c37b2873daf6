@@ -1,0 +1,66 @@
+package edu.miu.goldendomemarket.domain;
+
+public class Order {
+
+	private Integer orderId;
+	private Integer accountId;
+	private Integer itemId;
+	private String orderDate;
+	private String status;
+	private Integer amount;//how many of the items
+	public Order() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Order(Integer orderId, Integer accountId, Integer itemId, String orderDate, String status, Integer amount) {
+		super();
+		this.orderId = orderId;
+		this.accountId = accountId;
+		this.itemId = itemId;
+		this.orderDate = orderDate;
+		this.status = status;
+		this.amount = amount;
+	}
+	public Integer getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
+	public Integer getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(Integer accountId) {
+		this.accountId = accountId;
+	}
+	public Integer getItemId() {
+		return itemId;
+	}
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
+	}
+	public String getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public Integer getAmount() {
+		return amount;
+	}
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+	@Override
+	public String toString() {
+		return "Order [orderId=" + orderId + ", accountId=" + accountId + ", itemId=" + itemId + ", orderDate="
+				+ orderDate + ", status=" + status + ", amount=" + amount + "]";
+	}
+	
+}

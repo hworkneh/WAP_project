@@ -1,0 +1,71 @@
+package edu.miu.goldendomemarket.repository;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.miu.goldendomemarket.domain.Account;
+import edu.miu.goldendomemarket.util.Database;
+
+public class AccountRepository {
+
+	private Database db;
+	
+	public AccountRepository(Database db) {
+		this.db=db;
+		
+	}
+	
+	public List<Account> findAll(){
+		List<Account> acc=new ArrayList<Account>();
+		ResultSet rs;
+		try {
+			rs = db.runSql("select * from account");
+			while(rs.next()) {
+				String email=rs.getString("email");
+				String password=rs.getString("password");
+				String lastLogin=rs.getString("lastLogin");
+				String accountType=rs.getString("accountType");
+				acc.add(new Account(email, password, lastLogin, accountType));
+			}
+			return acc;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public Account findById(String email) {
+		Account acc=null;
+		ResultSet rs;
+		try {
+			rs = db.runSql("select * from account where email='"+email+"'");
+			while(rs.next()) {
+				String remail=rs.getString("email");
+				String password=rs.getString("password");
+				String lastLogin=rs.getString("lastLogin");
+				String accountType=rs.getString("accountType");
+				acc=new Account(remail, password, lastLogin, accountType);
+			}
+			return acc;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public Account save(Account account) {
+		try {
+			db.runSql("insert into account(email,password,lastLogin,accountType) values('"+account.getEmail()+"','"+account.getPassword()+"','"+account.getLastLogin()+"','"+account.getAccountType()+"')");
+			return account;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}	
+	}
+
+}

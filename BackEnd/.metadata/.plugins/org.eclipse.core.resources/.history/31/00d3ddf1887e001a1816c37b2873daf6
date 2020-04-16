@@ -1,0 +1,6 @@
+package edu.miu.goldendomemarket.repository;
+
+public class OrderRepository {
+
+	//db here query here
+}

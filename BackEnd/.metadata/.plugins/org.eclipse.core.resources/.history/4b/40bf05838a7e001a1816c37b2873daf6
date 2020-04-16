@@ -1,0 +1,12 @@
+package edu.miu.goldendomemarket.repository;
+
+import edu.miu.goldendomemarket.util.Database;
+
+public class ItemRepository {
+
+	private Database db;
+	
+	public ItemRepository(Database db) {
+		this.db=db;
+	}
+}

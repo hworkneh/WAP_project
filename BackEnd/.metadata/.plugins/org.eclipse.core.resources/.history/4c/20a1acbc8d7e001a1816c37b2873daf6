@@ -1,0 +1,73 @@
+package edu.miu.goldendomemarket.repository;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.miu.goldendomemarket.domain.Account;
+import edu.miu.goldendomemarket.domain.Order;
+import edu.miu.goldendomemarket.service.AccountService;
+import edu.miu.goldendomemarket.service.serviceImpl.AccountServiceImpl;
+import edu.miu.goldendomemarket.util.Database;
+
+public class OrderRepository {
+
+	private Database db;
+	private AccountServiceImpl account;
+	
+	public OrderRepository(Database db) {
+		this.db=db;
+		account=new AccountServiceImpl(db);
+		
+	}
+	
+
+	public List<Order> findAll() {
+		// TODO Auto-generated method stub
+		List<Order> acc=new ArrayList<Order>();
+		ResultSet rs;
+		try {
+			rs = db.runSql("select * from order");
+			while(rs.next()) {
+				Integer orderId=Integer.parseInt(rs.getString("orderId"));
+				Integer accountId=Integer.parseInt(rs.getString("accountId"));
+				Integer itemId=Integer.parseInt(rs.getString("itemId"));
+				String orderDate=rs.getString("orderDate");
+				String status=rs.getString("status");
+				Integer amount=Integer.parseInt(rs.getString("amount"));
+				Account a=account.findById(accountId);
+				
+				//acc.add(new Account(accountId,fullName, email, password, accountType));
+			}
+			return acc;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		//return null;
+	}
+
+	public Order findById(Integer orderId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Order save(Order account) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Order update(Order account, Integer orderId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void delete(Integer orderId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+}

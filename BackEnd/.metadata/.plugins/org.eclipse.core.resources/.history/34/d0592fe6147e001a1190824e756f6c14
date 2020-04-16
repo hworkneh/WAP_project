@@ -1,0 +1,52 @@
+package edu.miu.goldendomemarket.repository;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.miu.goldendomemarket.domain.Account;
+import edu.miu.goldendomemarket.util.Database;
+
+public class AccountRepository {
+
+	private Database db;
+	
+	public AccountRepository(Database db) {
+		this.db=db;
+		
+	}
+	
+	public List<Account> findAll(){
+		List<Account> acc=new ArrayList<Account>();
+		ResultSet rs;
+		try {
+			rs = db.runSql("select * from account");
+			int i=0;
+			while(rs.next()) {
+				String email=rs.getString("email");
+				String password=rs.getString("password");
+				String lastLogin=rs.getString("lastLogin");
+				String accountType=rs.getString("accountType");
+				acc.add(new Account(email, password, lastLogin, accountType));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+//	String sql = "select * from user";
+//	ResultSet rs;
+//	try {
+//		rs = db.runSql(sql);
+//
+//		while(rs.next()){
+//			out.println(rs.getString("user_name"));
+//		}
+//	} catch (SQLException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
+}

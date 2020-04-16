@@ -1,0 +1,40 @@
+package edu.miu.goldendomemarket.repository;
+
+import java.util.List;
+
+import edu.miu.goldendomemarket.domain.Item;
+import edu.miu.goldendomemarket.util.Database;
+
+public class ItemRepository {
+
+	private Database db;
+	
+	public ItemRepository(Database db) {
+		this.db=db;
+	}
+	
+	public List<Item> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Item findById(Integer itemId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Item save(Item item) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Item update(Item item, Integer itemId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void delete(Integer itemId) {
+		// TODO Auto-generated method stub
+		
+	}
+}

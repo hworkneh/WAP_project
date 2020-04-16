@@ -1,0 +1,56 @@
+package edu.miu.goldendomemarket.service.serviceImpl;
+
+import java.util.List;
+
+import edu.miu.goldendomemarket.domain.Order;
+import edu.miu.goldendomemarket.repository.OrderRepository;
+import edu.miu.goldendomemarket.service.OrderService;
+import edu.miu.goldendomemarket.util.Database;
+
+public class OrderServiceImpl implements OrderService {
+
+	private OrderRepository orderRepository;
+	public OrderServiceImpl(Database db) {
+		// TODO Auto-generated constructor stub
+		this.orderRepository=new OrderRepository(db);
+	}
+	
+	@Override
+	public List<Order> findAll() {
+		// TODO Auto-generated method stub
+		return orderRepository.findAll();
+	}
+
+	@Override
+	public Order findById(Integer orderId) {
+		// TODO Auto-generated method stub
+		return orderRepository.findById(orderId);
+	}
+
+	@Override
+	public Order save(Order order) {
+		// TODO Auto-generated method stub
+		return orderRepository.save(order);
+	}
+
+	@Override
+	public Order update(Order order, Integer orderId) {
+		// TODO Auto-generated method stub
+		return orderRepository.update(order, orderId);
+	}
+
+	@Override
+	public void delete(Integer orderId) {
+		// TODO Auto-generated method stub
+		orderRepository.delete(orderId);
+		
+	}
+
+	@Override
+	public List<Order> findByUser(Integer accountId) {
+		// TODO Auto-generated method stub
+		return orderRepository.findByUser(accountId);
+	}
+
+	
+}

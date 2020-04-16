@@ -1,0 +1,5 @@
+package edu.miu.goldendomemarket.domain;
+
+public class OrderList {
+
+}

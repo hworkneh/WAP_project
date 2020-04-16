@@ -1,0 +1,15 @@
+package edu.miu.goldendomemarket.service;
+
+import java.util.List;
+
+import edu.miu.goldendomemarket.domain.Order;
+
+public interface OrderService {
+
+	public List<Order> findAll();
+	public Order findById(Integer orderId);
+	public Order save(Order account);
+	public Order update(Order account, Integer orderId);
+	public void delete(Integer orderId);
+	public List<Order> findByUser(Integer accountId);
+}
