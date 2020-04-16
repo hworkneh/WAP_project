@@ -44,6 +44,7 @@ $( document ).ready(function() {
 
     $("#orderItemForm").submit(function(event) {
         event.preventDefault();
+        let day=new Date();
         let datad = {
             "account":{
                 "accountId":getCookie("user")
@@ -51,7 +52,7 @@ $( document ).ready(function() {
             "item":{
                 "itemId":$("#itemId").val()
             },
-            "orderDate": new Date(),
+            "orderDate": day.toLocaleDateString("en-US"),
             "status": "Ordered",
             "amount": $("#amount").val()
         }

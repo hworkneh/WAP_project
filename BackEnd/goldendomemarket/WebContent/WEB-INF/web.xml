@@ -28,6 +28,29 @@
 		<param-name>password</param-name>
 		<param-value>Anebek9;</param-value>
 	</context-param>
+	
+	<context-param>
+		<param-name>smtp_host</param-name>
+		<param-value>smtp.gmail.com</param-value>
+	</context-param>
+	<context-param>
+		<param-name>smtp_socketFactory_port</param-name>
+		<param-value>465</param-value>
+	</context-param>
+	<context-param>
+		<param-name>smtp_port</param-name>
+		<param-value>465</param-value>
+	</context-param>
+	<context-param>
+		<param-name>senderEmail</param-name>
+		<param-value>boaissotemp@gmail.com</param-value>
+	</context-param>
+	<context-param>
+		<param-name>senderEmailPassword</param-name>
+		<param-value></param-value>
+	</context-param>
+	
+	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>

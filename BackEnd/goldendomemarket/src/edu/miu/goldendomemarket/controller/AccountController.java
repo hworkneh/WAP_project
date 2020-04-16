@@ -20,6 +20,7 @@ import edu.miu.goldendomemarket.domain.Account;
 import edu.miu.goldendomemarket.service.serviceImpl.AccountServiceImpl;
 import edu.miu.goldendomemarket.util.Database;
 import edu.miu.goldendomemarket.util.PasswordHashing;
+import edu.miu.goldendomemarket.util.SendEmail;
 
 /**
  * Servlet implementation class AccountController
@@ -80,6 +81,11 @@ public class AccountController extends HttpServlet {
 			String pass = acc.getPassword();
 			acc.setPassword(PasswordHashing.hashpassword(pass));
 			result = accService.save(acc);
+			SendEmail sc=(SendEmail) getServletContext().getAttribute("emailsend");
+			String to=result.getEmail();
+			String sub="Golden Dome Market Account Info";
+			String msg="Your Account of Golden Dome Market is username "+result.getEmail()+ " Password= "+ pass;
+			sc.sendEmail(to, sub, msg);
 		} else {
 			result = null;
 		}

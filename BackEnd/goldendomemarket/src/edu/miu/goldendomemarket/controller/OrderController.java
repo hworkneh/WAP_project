@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import edu.miu.goldendomemarket.domain.Order;
 import edu.miu.goldendomemarket.service.serviceImpl.OrderServiceImpl;
 import edu.miu.goldendomemarket.util.Database;
+import edu.miu.goldendomemarket.util.SendEmail;
 
 /**
  * Servlet implementation class OrderController
@@ -123,6 +124,11 @@ public class OrderController extends HttpServlet {
 			Order tobeupdated = orderService.findById(order.getOrderId());
 			tobeupdated.setStatus(order.getStatus());
 			result = orderService.update(tobeupdated, tobeupdated.getOrderId());
+			SendEmail sc=(SendEmail) getServletContext().getAttribute("emailsend");
+			String to=result.getAccount().getEmail();
+			String sub="Golden Market Update on your Orders";
+			String msg="Your Order Item "+result.getItem().getItemName()+ " which was ordered on "+ result.getOrderDate()+" is "+result.getStatus();
+			sc.sendEmail(to, sub, msg);
 		} else {
 			result = null;
 		}
