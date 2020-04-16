@@ -23,6 +23,10 @@ configure the database connection info in web.xml as follows
 		<param-value>your database password</param-value>
 	</context-param>
 	
+Then import the database goldendomemarket.sql
 
+**Account credentials for admin
+username= admin@miu.edu
+password=A1234a
 
 
